@@ -1,0 +1,115 @@
+﻿@model StudentRegistration.ViewModel.TblCityViewModel
+
+
+<section>
+    @{
+        string actionName;
+        if (Model.DId != 0)
+        {
+            actionName = "EditCity";
+        }
+        else
+        {
+            actionName = "CreateCity";
+        }
+    }
+    <form asp-action="@actionName" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                @Html.HiddenFor(x =>x.DId)
+
+                <input type="hidden" value="@Model.CId" class="hdnCId" />
+                <input type="hidden" value="@Model.SId" class="hdnSId" />
+
+                <div class="modal fade" id="addMenu" style="background-color: #00000094;">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="addMenu">
+                                    @{
+                                        if (actionName == "EditCity")
+                                        {
+                                            <h4> Edit City</h4>
+                                        }
+                                        else
+                                        {
+                                            <h4> Add City</h4>
+                                        }
+                                    }
+                                </h4>
+                                <button type="button" class="close" data-bs-dismiss="modal">
+                                    <span class="btn btn-danger">x</span>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <level>CountryName</level>
+                                            <select asp-for="CId" class="form-control" id="C1">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <level>StateName</level>
+                                            <select asp-for="SId" class="form-control" id="S2">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label asp-for="DName" class="control-label"></label>
+                                            <input asp-for="DName" class="form-control" />
+                                            <span asp-validation-for="DName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    @if (Model.DId != 0)
+                                    {
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick="refreshPage()"><i class="bi bi-x-circle"></i>&nbspClose</button>
+                                        <button type="submit" value="Update" class="btn btn-primary"><i class="bi bi-pencil"></i>&nbspUpdate</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick="refreshPage()"><i class="bi bi-x-circle"></i>&nbspClose</button>
+                                        <button type="submit" value="Create" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>&nbspCreate</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </form>
+</section>
+<script src="~/js/site.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

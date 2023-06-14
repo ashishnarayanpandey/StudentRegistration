@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StudentRegistration.ViewModel.TblCountryViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="PlaceHolderHere"></div>
+<section class="col-md-12">
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addMenu"
+                data-url="@Url.Action("CreateCountry")">
+            <i class="bi bi-plus-circle"></i>&nbspCreate
+        </button>
+       
+       
+        <h4>CounryList</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CName)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary" data-toggle="ajax-modal"
+                                data-target="#addMenu" data-url="/List/EditCountry?id=@item.CId">
+                                <i class="bi bi-pencil"></i>&nbspEdit
+                            </button> |
+                            @Html.ActionLink("Delete","Delete",new { id = item.CId },new {  @class ="btn btn-danger  bi bi-trash",onclick = "return confirm('Are you sure you wish to delete this article?')"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

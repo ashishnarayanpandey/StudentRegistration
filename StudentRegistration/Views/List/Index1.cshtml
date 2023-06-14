@@ -1,0 +1,55 @@
+﻿@model StudentRegistration.ViewModel.StudentViewModel
+
+@{
+    ViewData["Title"] = "Index1";
+}
+
+<div id="PlaceHolderHere"></div>
+<section class="col-md-12">
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addMenu"
+                data-url="@Url.Action("CreateState")">
+            <i class="bi bi-plus-circle"></i>&nbspCreate
+        </button>
+
+
+        <h4>StateList</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <label>Country</label>
+                    </th>
+                    <th>
+                        <label>State</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.tblStates)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                var country = Model.tblCountries.Where(x => x.CId == item.CId).Select(x => x.CName).FirstOrDefault();
+                                <label>@country</label>
+                            }
+                        </td>
+                        <td>
+                            <label>@item.SName</label>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary" data-toggle="ajax-modal"
+                                data-target="#addMenu" data-url="/List/EditState?id=@item.SId">
+                                <i class="bi bi-pencil"></i>&nbspEdit
+                            </button> |
+                            @Html.ActionLink("Delete","Delete1",new { id = item.SId },new {  @class ="btn btn-danger  bi bi-trash",onclick = "return confirm('Are you sure you wish to delete this article?')"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

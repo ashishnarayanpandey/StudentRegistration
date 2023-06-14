@@ -1,0 +1,60 @@
+﻿@model StudentRegistration.ViewModel.StudentViewModel
+
+@{
+    ViewData["Title"] = "Index2";
+}
+
+<div id="PlaceHolderHere"></div>
+<section class="col-md-12">
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addMenu"
+                data-url="@Url.Action("CreateCity")">
+            <i class="bi bi-plus-circle"></i>&nbspCreate
+        </button>
+
+
+        <h4>CityList</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <label>State</label>
+                    </th>
+                    <th>
+                        <label>City</label>
+                    </th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.tblCities)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                var state = Model.tblStates.Where(x => x.SId == item.SId).Select(x => x.SName).FirstOrDefault();
+                                <level>@state</level>
+                            }
+                        </td>
+                        <td>
+                            <label>@item.DName</label>
+                        </td>
+                        
+                        <td>
+                            <button type="button" class="btn btn-secondary" data-toggle="ajax-modal"
+                                data-target="#addMenu" data-url="/List/EditCity?id=@item.DId">
+                                <i class="bi bi-pencil"></i>&nbspEdit
+                            </button> |
+                            @Html.ActionLink("Delete","Deletee",new { id = item.DId },new {  @class ="btn btn-danger  bi bi-trash",onclick = "return confirm('Are you sure you wish to delete this article?')"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+
